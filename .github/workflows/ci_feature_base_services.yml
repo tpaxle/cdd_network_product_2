@@ -11,6 +11,8 @@ on:
     - 'fix/*'
     - 'doc/'
 
+env:
+  env_path: "envs/nonpro/values.tfvars"
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -26,8 +28,9 @@ jobs:
       run: |
         terraform init
 
-    - name: Checking Ansible configuration...
+    - name: Terraform Validate
+      env:
+        BIGIP_PASSWORD: {{ secrets.BIGIP_PASSWORD }}
       run: |
-        echo ${{ secrets.VAULT_PASSWORD }} >> .vault      
-        ansible-playbook playbooks/fabric-deploy-All.yml -i inventory/ -t build --vault-password-file .vault
+        terraform plan -var-file={{ env.env_path }}
 
