@@ -20,7 +20,7 @@ jobs:
 
     - name: Terraform apply
       env: 
-        BIGIP_PASSWORD: "${{BIGIP_PASSWORD}}"
+        BIGIP_PASSWORD: "${{ secrets.BIGIP_PASSWORD }}"
       run: |
         terraform init
         terraform apply -auto-approve -var-file=${{ env.env_path }}
