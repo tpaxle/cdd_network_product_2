@@ -1,7 +1,6 @@
 variable "hostname" {}
 variable "port" {}
 variable "username" {}
-variable "password" {}
 
 variable "sync_config" {
   default = false

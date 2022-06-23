@@ -25,20 +25,15 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    - name: Create decrypt ansible vault
-      run:  |
-        echo ${{ secrets.VAULT_PASSWORD }} >> .vault
 
+    - name: Render terraform docs and push changes back to PR
+      uses: terraform-docs/gh-actions@main
+      with:
+        working-dir: .
+        output-file: README.md
+        output-method: inject
+        git-push: "true"
 
-    - name: Generating Code...
-      run: |
-        echo ${{ secrets.VAULT_PASSWORD }} > .vault            
-        ansible-playbook playbooks/fabric-deploy-All.yml -i inventory/ -t build --vault-password-file .vault
-
-
-    - name: Comparing Code...
-      run: |
-        echo "Comparing Code"
 
     - name: Add & Commit
       uses: EndBug/add-and-commit@v7.0.0
