@@ -70,6 +70,19 @@ ltm_pools = {
       "80"
     ]
   }
+  grv_pool_web_nonpro_2 = {
+    name                = "/Common/grv_pool_web_nonpro_2"
+    load_balancing_mode = "round-robin"
+    monitors            = ["/Common/grv_hc_http_web"]
+    nodes = [
+      "/Common/node101",
+      "/Common/node201"
+    ]
+    ports = [
+      "80",
+      "80"
+    ]
+  }
 }
 ##############################################################################
 ##############################################################################
