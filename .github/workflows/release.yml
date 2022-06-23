@@ -8,7 +8,8 @@ on:
   push:
     tags: v[0-9]+.[0-9]+.[0-9]+
 
-
+env:
+  env_path: "envs/nonpro/values.tfvars"
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   cd_pre:
@@ -17,19 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Checking Ansible configuration...
+    - name: Terraform apply
       run: |
-        echo ${{ secrets.VAULT_PASSWORD }} >> .vault      
-        ansible-playbook playbooks/fabric-deploy-All.yml -i inventory/ -t build --vault-password-file .vault
-
-    - name: Deploy configuration...
-      run: |
-        ansible-playbook playbooks/fabric-deploy-All.yml -i inventory/ -t deploy --vault-password-file .vault
-
-    - name: Testing configuration...
-      run: |
-        echo "Testing"
-
+        terraform apply -auto-approve -var-file=${{ env.env_path }}
 
   cd_pro:
     environment: pro
