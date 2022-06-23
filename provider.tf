@@ -3,7 +3,7 @@
 terraform {
   required_providers {
     bigip = {
-      source = "F5Networks/bigip"
+      source  = "F5Networks/bigip"
       version = "1.14.0"
     }
   }
@@ -13,6 +13,5 @@ terraform {
 provider "bigip" {
   address  = var.hostname
   username = var.username
-  password = var.password
-  port = var.port
+  port     = var.port
 }
