@@ -60,7 +60,7 @@ ltm_pools = {
   grv_pool_web_nonpro = {
     name                = "/Common/grv_pool_web_nonpro"
     load_balancing_mode = "round-robin"
-    monitors            = ["/Common/grv_hc_http_esmac"]
+    monitors            = ["/Common/grv_hc_http_web"]
     nodes = [
       "/Common/node101",
       "/Common/node201"
@@ -78,13 +78,11 @@ ltm_pools = {
 ltm_vservers = {
   grv_vs_webserver1 = {
     name                       = "/Common/grv_vs_webserver1"
-    destination                = "192.168.10.11"
+    destination                = "192.168.15.11"
     ports                      = "80"
     pool                       = "/Common/grv_pool_web_nonpro"
     source_address_translation = "automap"
     translate_address          = "enabled"
     translate_port             = "enabled"
     profiles                   = ["/Common/tcp"]
-    description                = "Batch Esmac VS"
-  }
-}
+    description                = "server example 1"

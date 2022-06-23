@@ -19,6 +19,8 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Terraform apply
+      env: 
+        BIGIP_PASSWORD: "${{BIGIP_PASSWORD}}"
       run: |
         terraform init
         terraform apply -auto-approve -var-file=${{ env.env_path }}
