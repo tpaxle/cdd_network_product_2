@@ -20,6 +20,7 @@ jobs:
 
     - name: Terraform apply
       run: |
+        terraform init
         terraform apply -auto-approve -var-file=${{ env.env_path }}
 
   cd_pro:
