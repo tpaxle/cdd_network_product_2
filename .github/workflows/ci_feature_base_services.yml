@@ -30,7 +30,6 @@ jobs:
 
     - name: Terraform Validate
       env:
-        BIGIP_PASSWORD: {{ secrets.BIGIP_PASSWORD }}
+        BIGIP_PASSWORD: "${{ secrets.BIGIP_PASSWORD }}"
       run: |
-        terraform plan -var-file={{ env.env_path }}
-
+        terraform plan -var-file=${{ env.env_path }}
