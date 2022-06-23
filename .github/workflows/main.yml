@@ -39,8 +39,6 @@ jobs:
       id: build_info
       shell: bash
       run: |
-        python -V
-        pip list | grep
         release_body=`changelog ${GITHUB_REPOSITORY} -t ${{ github.token }} -sr v${{steps.tag_version.outputs.previous_tag}} -b main`
         release_body="${release_body//'%'/%25}"
         release_body="${release_body//$'\n'/%0A}"
